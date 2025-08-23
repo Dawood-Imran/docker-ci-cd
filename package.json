@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Dawood-Imran/docker-ci-cd#readme",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongodb": "^5.0.0"
   }
 }
