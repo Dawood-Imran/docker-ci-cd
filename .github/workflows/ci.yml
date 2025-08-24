@@ -19,7 +19,7 @@ jobs:
           node-version: '20'
 
       - name: Verify directory
-        run: ls -la
+        run: ls -la && ls -la docker-compose/
         shell: bash
 
       - name: Install dependencies
@@ -39,7 +39,7 @@ jobs:
         shell: bash
 
       - name: Zip artifact
-        run: zip -r app-artifact.zip . -x ".git/*" ".github/*" "docker-compose/*" "node_modules/*"
+        run: zip -r app-artifact.zip . -i Dockerfile index.js package.json package-lock.json eslint.config.js docker-compose/*
         shell: bash
 
       - name: Upload artifact
