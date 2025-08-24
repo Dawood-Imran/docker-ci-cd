@@ -27,7 +27,9 @@ jobs:
         shell: powershell
 
       - name: Debug directory structure
-        run: dir ./app && dir ./app/docker-compose
+        run: |
+          dir ./app
+          dir ./app/docker-compose
         shell: powershell
 
       - name: Set up Docker Compose
