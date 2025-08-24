@@ -11,7 +11,7 @@ async function connectToMongo() {
   const client = new MongoClient(mongoUri);
   await client.connect();
   db = client.db('mydb');
-  console.log('Connected to MongoDB');
+  // console.log('Connected to MongoDB');
 }
 
 // Initialize MongoDB connection
@@ -35,5 +35,5 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  // console.log(`Server running at http://localhost:${port}`);
 });
