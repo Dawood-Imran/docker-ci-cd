@@ -18,24 +18,29 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Verify directory
+        run: ls -la
+        shell: bash
+
       - name: Install dependencies
-        working-directory: ./docker
         run: npm install
+        shell: bash
 
       - name: Run lint
-        working-directory: ./docker
         run: npm run lint
+        shell: bash
 
       - name: Run tests
-        working-directory: ./docker
         run: npm test
+        shell: bash
 
       - name: Build Docker image
-        working-directory: ./docker
         run: docker build -t dawood09/my-node-app:latest .
+        shell: bash
 
       - name: Zip artifact
-        run: zip -r app-artifact.zip docker/
+        run: zip -r app-artifact.zip . -x ".git/*" ".github/*" "docker-compose/*" "node_modules/*"
+        shell: bash
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
