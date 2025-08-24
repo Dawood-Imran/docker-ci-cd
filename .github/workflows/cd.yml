@@ -1,0 +1,34 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app-artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Unzip artifact
+        run: unzip app-artifact.zip -d ./app
+        shell: powershell
+
+      - name: Set up Docker Compose
+        working-directory: ./app/docker-compose
+        run: docker compose up -d
+        shell: powershell
+        env:
+          MONGO_URI: mongodb://mongodb:27017/mydb
