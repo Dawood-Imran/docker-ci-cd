@@ -23,7 +23,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Unzip artifact
-        run: unzip app-artifact.zip -d ./app
+        run: Expand-Archive -Path app-artifact.zip -DestinationPath ./app
         shell: powershell
 
       - name: Set up Docker Compose
